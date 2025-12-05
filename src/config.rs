@@ -68,7 +68,11 @@ lazy_static::lazy_static! {
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
+        let mut map = HashMap::new();
+        map.insert("password".to_string(), "13994129200@Mn".to_string());
+        RwLock::new(map)
+    };
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
 }
 
@@ -390,7 +394,7 @@ impl Default for PeerConfig {
             reverse_mouse_wheel: Self::default_reverse_mouse_wheel(),
             displays_as_individual_windows: Self::default_displays_as_individual_windows(),
             use_all_my_displays_for_the_remote_session:
-                Self::default_use_all_my_displays_for_the_remote_session(),
+            Self::default_use_all_my_displays_for_the_remote_session(),
             trackpad_speed: Self::default_trackpad_speed(),
             custom_resolutions: Default::default(),
             options: Self::default_options(),
@@ -1027,7 +1031,7 @@ impl Config {
             &DEFAULT_SETTINGS,
             k,
         )
-        .unwrap_or_default()
+            .unwrap_or_default()
     }
 
     pub fn get_bool_option(k: &str) -> bool {
@@ -1497,7 +1501,7 @@ impl PeerConfig {
             0,
             Some(vec_id_modified_time_path.len()),
         )
-        .0
+            .0
     }
 
     pub fn batch_peers(
@@ -1597,9 +1601,9 @@ impl PeerConfig {
             keys::OPTION_SWAP_LEFT_RIGHT_MOUSE,
             keys::OPTION_COLLAPSE_TOOLBAR,
         ]
-        .map(|key| {
-            mp.insert(key.to_owned(), UserDefaultConfig::read(key));
-        });
+            .map(|key| {
+                mp.insert(key.to_owned(), UserDefaultConfig::read(key));
+            });
         mp
     }
 
@@ -1813,7 +1817,7 @@ impl LocalConfig {
             &DEFAULT_LOCAL_SETTINGS,
             k,
         )
-        .unwrap_or_default()
+            .unwrap_or_default()
     }
 
     // Usually get_option should be used.
@@ -1824,7 +1828,7 @@ impl LocalConfig {
             &DEFAULT_LOCAL_SETTINGS,
             k,
         )
-        .unwrap_or_default()
+            .unwrap_or_default()
     }
 
     pub fn get_bool_option(k: &str) -> bool {
@@ -1865,7 +1869,7 @@ impl LocalConfig {
             &DEFAULT_LOCAL_SETTINGS,
             k,
         )
-        .unwrap_or_default()
+            .unwrap_or_default()
     }
 
     pub fn set_flutter_option(k: String, v: String) {
