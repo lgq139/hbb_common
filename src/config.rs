@@ -107,7 +107,7 @@ const CHARS: &[char] = &[
 ];
 
 pub const RENDEZVOUS_SERVERS: &[&str] = &["www.lgqlzm.top"];
-pub const RS_PUB_KEY: &str = "13994129200@Mn";
+pub const RS_PUB_KEY: &str = "Q4gfOjXYh3AVqewGLFGodjPRQTgR09GzM4sntci6nuQ=";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
 pub const RELAY_PORT: i32 = 21117;
